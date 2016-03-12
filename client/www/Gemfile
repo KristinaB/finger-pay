@@ -1,0 +1,6 @@
+source "http://rubygems.org"
+
+gem "guard-haml"
+#gem "haml"
+
+gem 'coffee-script'

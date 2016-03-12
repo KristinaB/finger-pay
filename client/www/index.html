@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Ratchet template page</title>
+    <!-- Sets initial viewport load and disables zooming -->
+    <meta content='telephone=no' name='format-detection'>
+    <meta content='width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1' name='viewport'>
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <meta content='black' name='apple-mobile-web-app-status-bar-style'>
+    <!-- Include the compiled Ratchet CSS -->
+    <link href='css/ratchet.css' rel='stylesheet'>
+    <!-- Include the compiled Ratchet JS -->
+    <script src='js/ratchet.js'></script>
+    <link href='css/app.css' rel='stylesheet'>
+    <script>
+      if (window.hyper) { console.log = hyper.log; }
+    </script>
+  </head>
+  <body>
+    <header class='bar bar-nav'>
+      <h1 class='title'>FingerPay</h1>
+      <span class='icon icon-gear pull-right'></span>
+    </header>
+    <div class='content'>
+      <div class='content-padded idle'>
+        <div class='s40'></div>
+        <p class='centered'>FingerPay is active.</p>
+        <div class='s50'></div>
+        <img class='logo pulse' src='./images/logo.svg'>
+        <div class='s50'></div>
+        <div class='card'>
+          <div class='content-padded'>
+            <p>- Move near the product you want to buy.</p>
+            <p>- Perform the 'buy' gesture.</p>
+          </div>
+        </div>
+      </div>
+      <div class='content-padded near'>
+        <div class='s40'></div>
+        <div class='centered'>
+          <p>You are near an item you can buy.</p>
+          <div class='s40'></div>
+          <img class='product' src='./images/product1.jpg'>
+          <div class='s40'></div>
+          <h2 class='dull'>Fancy Shoes - (£132)</h2>
+          <div class='s40'></div>
+        </div>
+        <div class='card'>
+          <div class='content-padded'>
+            <p class='strong'>Perform the gesture to buy.</p>
+          </div>
+        </div>
+      </div>
+      <div class='content-padded bought'>
+        <div class='s40'></div>
+        <div class='centered'>
+          <p class='strong'>You bought 'Fancy Shoes'!</p>
+          <div class='s40'></div>
+          <img class='product minip' src='./images/product1.jpg'>
+          <div class='s40'></div>
+          <p class='mini timed_message'>
+            You have still
+            <span class='timer'>11</span>
+            seconds to cancel the order, then the payment will be confirmed.
+          </p>
+        </div>
+      </div>
+      <script src='cordova.js'></script>
+      <script src='js/lib/jquery-2.1.1.min.js'></script>
+      <script>
+        (function() {
+          var c;
+        
+          c = console;
+        
+          $(function() {
+            var countd;
+            $(".idle").hide();
+            $(".near").hide();
+            $(".bought").show();
+            countd = function() {
+              var time;
+              time = Number($("span.timer").html());
+              time -= 1;
+              $("span.timer").html(time);
+              if (time < 0) {
+                return $(".timed_message").hide();
+              } else {
+                return setTimeout(countd, 1000);
+              }
+            };
+            return countd();
+          });
+        
+        }).call(this);
+      </script>
+    </div>
+    <script src='js/lib/touch.js'></script>
+    <script src='js/app.js'></script>
+    <script src='js/screen-range-beacons.js'></script>
+    <script src='js/screen-scan-beacons.js'></script>
+    <script>
+      setTimeout(function(){
+        if (typeof estimote != "undefined")
+          app.startRangingBeacons()
+      },200)
+      
+      setTimeout(function(){
+        window.location = "#myModalexample"
+      },2000)
+    </script>
+  </body>
+</html>

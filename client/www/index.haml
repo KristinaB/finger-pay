@@ -1,0 +1,123 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}/
+    %title Ratchet template page
+    / Sets initial viewport load and disables zooming
+    %meta{content: "telephone=no", name: "format-detection"}/
+    %meta{content: "width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1", name: "viewport"}/
+    / Makes your prototype chrome-less once bookmarked to your phone's home screen
+    %meta{content: "yes", name: "apple-mobile-web-app-capable"}/
+    %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}/
+    / Include the compiled Ratchet CSS
+    %link{href: "css/ratchet.css", rel: "stylesheet"}/
+    / Include the compiled Ratchet JS
+    %script{src: "js/ratchet.js"}
+    %link{href: "css/app.css", rel: "stylesheet"}/
+    :javascript
+      if (window.hyper) { console.log = hyper.log; }
+  %body
+    %header.bar.bar-nav
+      %h1.title FingerPay
+
+      -# proximity icon? ring icon?
+      %span.icon.icon-gear.pull-right
+
+    .content
+      .content-padded.idle
+        .s40
+        %p.centered FingerPay is active.
+        .s50
+        %img.logo.pulse{ src: "./images/logo.svg" }
+        .s50
+
+        .card
+          .content-padded
+            %p - Move near the product you want to buy.
+            %p - Perform the 'buy' gesture.
+
+      .content-padded.near
+        .s40
+        .centered
+          %p You are near an item you can buy.
+          .s40
+          %img.product{ src: "./images/product1.jpg" }
+          .s40
+          %h2.dull Fancy Shoes - (£132)
+          .s40
+
+        .card
+          .content-padded
+            %p.strong Perform the gesture to buy.
+
+      .content-padded.bought
+        .s40
+        .centered
+          %p.strong You bought 'Fancy Shoes'!
+          .s40
+          %img.product.minip{ src: "./images/product1.jpg" }
+          .s40
+          %p.mini.timed_message
+            You have still
+            %span.timer 11
+            seconds to cancel the order, then the payment will be confirmed.
+
+      %script{src: "cordova.js"}
+      %script{src: "js/lib/jquery-2.1.1.min.js"}
+      :coffee
+        c = console
+        $ ->
+          $(".idle").hide()
+          $(".near").hide()   # animation appear
+          $(".bought").show() # animation appear
+
+          countd = ->
+            time = Number $("span.timer").html()
+            time -= 1
+            $("span.timer").html time
+            if time < 0
+              $(".timed_message").hide()
+            else
+              setTimeout countd, 1000
+          countd()
+
+      -# sound + slide animation!
+
+      -#
+      -# .card
+      -#   %ul.table-view
+      -#     %li.table-view-cell
+      -#       %a.push-right{href: "#"}
+      -#         %strong Ratchet documentation
+
+      -# %a{ href:"#myModalexample", class:"btn"} Open modal
+
+      -# #myModalexample.modal
+      -#   %header.bar.bar-nav
+      -#     %a.icon.icon-close.pull-right{href: "#myModalexample"}
+      -#     %h1.title Modal
+      -#   .content
+      -#     %p.content-padded xxx
+
+
+      -# %p Beacon status:
+      -# #id-screen-range-beacons
+      -#   .style-item-list
+      -# #id-screen-scan-beacons
+      -#   .style-item-list
+
+
+    %script{src: "js/lib/touch.js"}
+    %script{src: "js/app.js"}
+    %script{src: "js/screen-range-beacons.js"}
+    %script{src: "js/screen-scan-beacons.js"}
+
+    :javascript
+      setTimeout(function(){
+        if (typeof estimote != "undefined")
+          app.startRangingBeacons()
+      },200)
+
+      setTimeout(function(){
+        window.location = "#myModalexample"
+      },2000)

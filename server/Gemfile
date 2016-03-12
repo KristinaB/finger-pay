@@ -1,0 +1,9 @@
+source "http://rubygems.org"
+
+gem "realex", github: "paulca/realex"
+gem 'rest-client'
+
+gem "sinatra"
+gem "haml"
+
+gem "puma"
