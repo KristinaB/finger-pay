@@ -37,13 +37,12 @@ doPollPay = ->
       c.log "PAY"
       PAID = true
       paidCb()
-    pollPay() unless PAID
+  pollPay() unless PAID
 
 # doPollPayThrott = _.throttle doPollPay, 800
 
 pollPay = ->
   _.delay doPollPay, 1000
-
 
 
 $("body").on "beacon_near", (evt) =>

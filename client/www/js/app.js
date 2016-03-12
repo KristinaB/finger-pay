@@ -34,17 +34,17 @@ paidCb = function() {
 };
 
 doPollPay = function() {
-  return $.getJSON("http://" + SERVER_HOST + ":3000/payment_status", function(resp) {
+  $.getJSON("http://" + SERVER_HOST + ":3000/payment_status", function(resp) {
     c.log("payment_status", resp);
     if (resp.success && resp.status === "paid") {
       c.log("PAY");
       PAID = true;
-      paidCb();
-    }
-    if (!PAID) {
-      return pollPay();
+      return paidCb();
     }
   });
+  if (!PAID) {
+    return pollPay();
+  }
 };
 
 pollPay = function() {
