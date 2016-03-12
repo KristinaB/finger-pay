@@ -37,8 +37,6 @@ doPollPay = ->
       c.log "PAY"
       PAID = true
       paidCb()
-
-
     pollPay() unless PAID
 
 doPollPayThrott = _.throttle doPollPay, 800
