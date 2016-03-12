@@ -4,7 +4,7 @@ require_relative 'env'
 class Realhack < Sinatra::Base
 
   @@status = nil
-  
+
   def payment_status
     @@status
   end
@@ -22,13 +22,13 @@ class Realhack < Sinatra::Base
   # this should be a post - we should be using the native SDK for logbar ring to make post request but it's available only on iOS at the moment and we wanted to make a cross platform app
   get '/pay/:product_id' do |product_id|
     content_type :json
-    p = Payment.new
-    transaction = p.pay product_id.to_sym
     @@status = :paid
     Thread.new {
+      p = Payment.new
+      transaction = p.pay product_id.to_sym
       sleep 30
       @@status = nil
     }
-    { success: true, transaction: transaction }.to_json
+    { success: true, transaction: "ok" }.to_json
   end
 end

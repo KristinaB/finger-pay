@@ -26,9 +26,10 @@
 			// Generate HTML for beacons.
 			$.each(beaconInfo.beacons, function(key, beacon)
 			{
-				console.log("dist", beacon.distance)// todo copy code from other example
+				// console.log("dist", beacon.distance)// todo copy code from other example
 
-				if (beacon.distance < 0.6) {
+				// TODO get BEACON_MAJ and min values from config
+				if (beacon.distance < 0.6 && beacon.major ==  11245 && beacon.minor == 58301) {
 					console.log("BEACON NEAR (dist) < 0.6")
 					$("body").trigger("beacon_near")
 				}
