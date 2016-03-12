@@ -3,9 +3,10 @@
 {
 	app.startRangingBeacons = function()
 	{
+
 		function onRange(beaconInfo)
 		{
-			displayBeconInfo(beaconInfo);
+			displayBeconInfoThrottled(beaconInfo);
 		}
 
 		function onError(errorMessage)
@@ -25,11 +26,20 @@
 			// Generate HTML for beacons.
 			$.each(beaconInfo.beacons, function(key, beacon)
 			{
-				console.log(beacon.distance)// todo copy code from other example
+				console.log("dist", beacon.distance)// todo copy code from other example
+
+				if (beacon.distance < 0.6) {
+					console.log("BEACON NEAR (dist) < 0.6")
+					$("body").trigger("beacon_near")
+				}
+
 				var element = $(createBeaconHTML(beacon));
 				$('#id-screen-range-beacons .style-item-list').append(element);
 			});
 		};
+
+		var displayBeconInfoThrottled = _.throttle(displayBeconInfo, 500)
+
 
 		function createBeaconHTML(beacon)
 		{

@@ -64,22 +64,7 @@
 
       %script{src: "cordova.js"}
       %script{src: "js/lib/jquery-2.1.1.min.js"}
-      :coffee
-        c = console
-        $ ->
-          $(".idle").hide()
-          $(".near").hide()   # animation appear
-          $(".bought").show() # animation appear
 
-          countd = ->
-            time = Number $("span.timer").html()
-            time -= 1
-            $("span.timer").html time
-            if time < 0
-              $(".timed_message").hide()
-            else
-              setTimeout countd, 1000
-          countd()
 
       -# sound + slide animation!
 
@@ -107,10 +92,13 @@
       -#   .style-item-list
 
 
+    %script{src: "js/vendor/underscore.js"}
+    %script{src: "js/env.js"}
     %script{src: "js/lib/touch.js"}
+    %script{src: "js/app-legacy.js"}
     %script{src: "js/app.js"}
     %script{src: "js/screen-range-beacons.js"}
-    %script{src: "js/screen-scan-beacons.js"}
+    -# %script{src: "js/screen-scan-beacons.js"}
 
     :javascript
       setTimeout(function(){

@@ -70,3 +70,7 @@ img.product {
   background: #999;
   color: white;
 }
+
+.near, .bought {
+  display: none;
+}

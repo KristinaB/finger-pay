@@ -1,10 +1,9 @@
 GIT
-  remote: git://github.com/paulca/realex.git
-  revision: cde5382bf29d0f79012d5016da80edeb870c6ad0
+  remote: git://github.com/make-void/realex.git
+  revision: a678865afc27a813287237962114e2bae99e9dcb
   specs:
     realex (0.4.1)
       builder
-      nokogiri
       nokogiri (~> 1.4)
 
 GEM
