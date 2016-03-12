@@ -39,10 +39,10 @@ doPollPay = ->
       paidCb()
     pollPay() unless PAID
 
-doPollPayThrott = _.throttle doPollPay, 800
+# doPollPayThrott = _.throttle doPollPay, 800
 
 pollPay = ->
-  _.delay doPollPayThrott, 1000
+  _.delay doPollPay, 1000
 
 
 
